@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+<body>
+   <div id="app">
+        <router-link to="customer">操作</router-link>
+        
+        <router-link to="info">信息</router-link>
+
+        <router-view></router-view>
+   </div>
+
+   <!-- 模板 -->
+   <template id="login">
+       <div>
+           用户名: <input type="text"><br>
+           密码: <input type="text"><br>
+           <input type="button" value="登录" @click="show">
+        </div>
+   </template>
+
+   <template id="register">
+    <div>
+        用户名: <input type="text"><br>
+        密码: <input type="text"><br>
+        再次输入密码: <input type="text"><br>
+        <input type="button" value="注册">
+     </div>
+    </template>
+
+    <template id="info">
+        <h1>hhhhhhhhhhhhhhhhhhhhhhhhhhh</h1>
+    </template>
+
+    <template id="custom">
+        <div>
+            <h2>用户操作页面</h2>
+            <a href="#/customer/login">登录</a>
+            <a href="#/customer/register">注册</a>
+
+            <router-view></router-view>
+        </div>
+    </template>
+
+   <script>
+       var login = {
+            template:"#login",
+            methods: {
+                    show(){
+                        console.log(this.$route)
+                       // console.log(this.$router)
+                    }
+                }
+       }
+       var register = {
+           template:"#register"
+       }
+       var info = {
+           template:"#info"
+       }
+       var custom = {
+           template:"#custom"
+       }
+
+       const router = new VueRouter({
+            routes: [
+                    {
+                        path:"/customer",
+                        component:custom,
+                        children:[
+                            {path:"login/:xx",component:login},
+                            {path:"register",component:register},
+                        ]
+                    
+                    },
+                
+                {path:"/info",component:info}
+            ]
+       })
+
+       new Vue({
+           el:"#app",
+           router:router
+       })
+   </script>
+</body>
+</html>

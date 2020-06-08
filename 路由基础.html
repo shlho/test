@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+<body>
+   <div id="app">
+        <router-link to="login">登录</router-link>
+        <router-link to="register">注册</router-link>
+        <router-link to="info">信息</router-link>
+
+        <router-view></router-view>
+   </div>
+
+   <!-- 模板 -->
+   <template id="login">
+       <div>
+           用户名: <input type="text"><br>
+           密码: <input type="text"><br>
+           <input type="button" value="登录">
+        </div>
+   </template>
+
+   <template id="register">
+    <div>
+        用户名: <input type="text"><br>
+        密码: <input type="text"><br>
+        再次输入密码: <input type="text"><br>
+        <input type="button" value="注册">
+     </div>
+    </template>
+
+    <template id="info">
+        <h1>hhhhhhhhhhhhhhhhhhhhhhhhhhh</h1>
+    </template>
+
+
+   <script>
+       var login = {
+            template:"#login"
+       }
+       var register = {
+           template:"#register"
+       }
+       var info = {
+           template:"#info"
+       }
+
+       const router = new VueRouter({
+            routes: [
+                {path:"/login",component:login},
+                {path:"/register",component:register},
+                {path:"/info",component:info}
+            ]
+       })
+
+       new Vue({
+           el:"#app",
+           router:router
+       })
+   </script>
+</body>
+</html>
